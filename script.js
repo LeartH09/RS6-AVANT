@@ -100,11 +100,9 @@ document.querySelectorAll("img").forEach((image) => {
 
 document.querySelectorAll("video[data-filename]").forEach((video) => {
   const filename = video.dataset.filename || "missing-video";
-  const sources = Array.from(video.querySelectorAll("source"));
-  let sourceErrors = 0;
 
   const showVideoPlaceholder = () => {
-    if (video.dataset.placeholderShown === "true") return;
+    if (video.dataset.placeholderShown === "true" || video.readyState > 0) return;
 
     video.dataset.placeholderShown = "true";
     const placeholder = document.createElement("div");
@@ -116,24 +114,4 @@ document.querySelectorAll("video[data-filename]").forEach((video) => {
   };
 
   video.addEventListener("error", showVideoPlaceholder);
-
-  sources.forEach((source) => {
-    source.addEventListener("error", () => {
-      sourceErrors += 1;
-      if (sourceErrors >= sources.length && video.readyState === 0) {
-        showVideoPlaceholder();
-      }
-    });
-  });
-
-  window.setTimeout(() => {
-    const noPlayableSource =
-      video.networkState === HTMLMediaElement.NETWORK_NO_SOURCE ||
-      video.error ||
-      (!video.currentSrc && video.readyState === 0);
-
-    if (noPlayableSource) {
-      showVideoPlaceholder();
-    }
-  }, 1500);
 });
