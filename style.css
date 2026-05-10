@@ -675,63 +675,6 @@ h2 {
   gap: 14px;
 }
 
-.driving-film {
-  display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
-  gap: 18px;
-  align-items: stretch;
-  margin-bottom: 22px;
-}
-
-.video-shell {
-  position: relative;
-  min-height: 360px;
-  margin: 0;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  overflow: hidden;
-  background:
-    linear-gradient(135deg, rgba(213, 0, 28, 0.08), transparent 45%),
-    #101113;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.42);
-}
-
-.showroom-video,
-.video-placeholder {
-  width: 100%;
-  height: 100%;
-  min-height: 360px;
-}
-
-.showroom-video {
-  display: block;
-  object-fit: cover;
-}
-
-.film-copy {
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background:
-    linear-gradient(135deg, rgba(213, 0, 28, 0.12), transparent 44%),
-    rgba(16, 17, 19, 0.9);
-  padding: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.film-copy h3 {
-  margin: 0;
-  color: #fff;
-  font-size: 2.1rem;
-  line-height: 1;
-}
-
-.film-copy p:last-child {
-  margin-bottom: 0;
-  color: var(--muted);
-}
-
 .gallery-item {
   position: relative;
   min-height: 0;
@@ -867,18 +810,6 @@ h2 {
   text-transform: uppercase;
 }
 
-.video-placeholder {
-  display: grid;
-  place-items: center;
-  padding: 24px;
-  color: var(--silver);
-  font-size: 0.92rem;
-  font-weight: 900;
-  letter-spacing: 0.06em;
-  text-align: center;
-  text-transform: uppercase;
-}
-
 .hero-media .image-placeholder {
   min-height: 100%;
   border: 0;
@@ -981,7 +912,6 @@ h2 {
   .media-feature,
   .faq-layout,
   .performance-showcase,
-  .driving-film,
   .dashboard-layout {
     grid-template-columns: 1fr;
     gap: 34px;
@@ -989,10 +919,7 @@ h2 {
 
   .image-frame,
   .image-frame-tall,
-  .dashboard-screen,
-  .video-shell,
-  .showroom-video,
-  .video-placeholder {
+  .dashboard-screen {
     min-height: 420px;
   }
 
@@ -1079,10 +1006,7 @@ h2 {
 
   .image-frame,
   .image-frame-tall,
-  .dashboard-screen,
-  .video-shell,
-  .showroom-video,
-  .video-placeholder {
+  .dashboard-screen {
     min-height: 330px;
   }
 

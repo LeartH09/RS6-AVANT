@@ -97,21 +97,3 @@ document.querySelectorAll("img").forEach((image) => {
     image.replaceWith(placeholder);
   });
 });
-
-document.querySelectorAll("video[data-filename]").forEach((video) => {
-  const filename = video.dataset.filename || "missing-video";
-
-  const showVideoPlaceholder = () => {
-    if (video.dataset.placeholderShown === "true" || video.readyState > 0) return;
-
-    video.dataset.placeholderShown = "true";
-    const placeholder = document.createElement("div");
-    placeholder.className = "video-placeholder";
-    placeholder.textContent = `Add video: ${filename}`;
-    placeholder.setAttribute("role", "img");
-    placeholder.setAttribute("aria-label", `Add video: ${filename}`);
-    video.replaceWith(placeholder);
-  };
-
-  video.addEventListener("error", showVideoPlaceholder);
-});
