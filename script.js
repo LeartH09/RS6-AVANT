@@ -35,6 +35,51 @@ window.addEventListener("load", () => {
   target?.scrollIntoView({ behavior: "auto", block: "start" });
 });
 
+document.querySelectorAll("[data-collapsible]").forEach((container, index) => {
+  const itemSelector = container.dataset.collapsibleItems;
+  const items = itemSelector
+    ? Array.from(container.querySelectorAll(itemSelector))
+    : Array.from(container.children);
+  const visibleCount = Number.parseInt(container.dataset.visibleCount || "6", 10);
+
+  if (items.length <= visibleCount) return;
+
+  if (!container.id) {
+    container.id = `collapsible-${index + 1}`;
+  }
+
+  const label = container.dataset.showLabel || "items";
+  const toggle = document.createElement("button");
+  toggle.className = "show-toggle";
+  toggle.type = "button";
+  toggle.setAttribute("aria-controls", container.id);
+  toggle.setAttribute("aria-expanded", "false");
+
+  const setExpanded = (expanded, fromUser = false) => {
+    items.forEach((item, itemIndex) => {
+      const shouldHide = !expanded && itemIndex >= visibleCount;
+      item.classList.toggle("collapsible-hidden", shouldHide);
+
+      if (expanded && fromUser) {
+        item.classList.add("is-visible");
+      }
+    });
+
+    toggle.textContent = expanded ? `Show less ${label}` : `Show more ${label}`;
+    toggle.setAttribute("aria-expanded", String(expanded));
+    container.classList.toggle("is-expanded", expanded);
+  };
+
+  setExpanded(false);
+
+  toggle.addEventListener("click", () => {
+    const expanded = toggle.getAttribute("aria-expanded") === "true";
+    setExpanded(!expanded, true);
+  });
+
+  container.insertAdjacentElement("afterend", toggle);
+});
+
 const revealTargets = document.querySelectorAll(".reveal, .stat-card");
 const revealObserver = new IntersectionObserver(
   (entries) => {
